@@ -1,0 +1,1 @@
+# nmr-star-dictionary-scripts
