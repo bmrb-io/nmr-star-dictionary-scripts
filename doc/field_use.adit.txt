@@ -1,0 +1,100 @@
+view file
+---------
+
+category groups:
+
+    aditcatgrp :
+        groupID
+        supergrpid
+        sfCategory
+        catGrpViewName
+        aditReplicable
+        catGrpViewHelp
+        aditViewFlgs
+
+    aditsupergrp :
+        supergrpid
+        superGrpName
+
+categories:
+
+    dict (aka adit item table) :
+        tagCategory
+        OriginalCategory
+        aditCatViewName
+        aditCatManFlg
+        aditCatViewType
+        aditInitialRows
+        dictionaryseq
+        dbFlg
+        aditExists
+
+items:
+
+    dict (aka adit item table) :
+        tagCategory
+        tagfield
+        adititemviewname
+        description
+        aditviewflags
+        itemEnumClosedFlg
+        aditformcode
+        sfidflg
+        sfNameflg
+        dictionaryseq
+        dbFlg
+        aditExists
+
+mandatory overrides:
+
+    aditmanoverride :
+        orderOfOperations
+        sfcategory
+        categoryId
+        itemName
+        newViewMandatoryCode
+        conditionalCatId
+        conditionalItemName
+        conditionalItemValue
+
+enum_ties:
+
+    aditenumtie :
+        categoryId
+        itemName
+        enumCategoryId
+        enumItemName
+
+
+cif_bmrb_dic
+------------
+
+    aditcatgrp:
+        sfCategory
+        groupID
+
+    dict (aka adit item table) :
+        tagCategory
+        OriginalCategory
+        LoopFlag
+        dictionaryseq
+        dbFlg
+        aditExists
+        tagField
+        description
+        dbnullable
+        defaultValue
+        dbtype
+        example
+
+    aditenumhdr:
+        originaltag
+        enumid
+
+    aditenumdtl:
+        value
+        detail
+        seq
+        enumid
+
+nmrcifmatch is no longer used and could be removed in ADIT-NMR code

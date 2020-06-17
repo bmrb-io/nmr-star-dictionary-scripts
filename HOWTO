@@ -1,0 +1,104 @@
+Create various dictionary files from Eldon's CSV files
+======================================================
+
+
+0. Get the latest from GitHUb nmr-star-dictionary
+-------------------------------------------------
+Files:
+```
+adit_cat_grp_o.csv
+adit_enum_dtl.csv
+adit_enum_hdr.csv
+adit_enum_ties.csv
+adit_interface_dict.txt
+adit_item_tbl_o.csv
+adit_man_over.csv
+adit_nmr_upload_tags.csv
+adit_super_grp_o.csv
+adit_tag_validation.csv
+comments.str
+default-entry.cif
+extra_enumerations.str
+item_type_units.txt
+nmr_cif_match.csv
+nmr-star-dictionary
+query_interface.csv
+val_overide_add.csv
+xlschem_ann.csv
+```
+
+1. Make everything:
+-------------------
+`__main__.py -c conf/dictionary.properties`
+
+
+Detailed procedure
+------------------
+
+I. Create dictionary sqlite3 DB from CSV files.
+-----------------------------------------------
+mapper is driven by a bunch of config files.
+
+conf/dictionary.properties has paths to input files and map files,
+plus some settings specific to validation dictionary.
+
+Location of input files is csv.dir in [dictionary] section.
+
+Each map has its own section called [table_N]
+
+Each section has
+  CSV file name
+  DB table name
+  column count
+followed by a list of
+  colX = <DB column name>
+for X = 0 to column count - 1.
+
+There is additional data in extra files listed in the [dictionary] section.
+
+The output of step I is the [dictionary]:sqlite3.file that is used directly 
+by the python validator code (entry-release etc.)
+
+
+II. ADIT-NMR dictionary
+-----------------------
+
+2020-06-16 - ADIT-NMR is no longer maintained.
+
+See [adit] section in scripts/dictionary.properties
+Output files are listed there, they are written to output_dir:
+
+bmrb_1.view
+default-entry.cif
+dict.cif
+mmcif_bmrb.dic
+nmrcifmatch.cif
+table_dict.str
+View-bmrb.cif
+
+
+III. Validator
+--------------
+
+Dictionary file for interactive validator is validict.3.str
+written to [validict]:output_dir
+
+
+IV. files for databases & www tag lookup interface
+--------------------------------------------------
+
+Output files are written to [www]:output_dir
+They are SQL script for creating tables and views, plus CSV table
+dumps to be loaded into postgres with COPY ... CSV
+
+
+V. Publish.
+-----------
+
+1. nmr-star-software-dictionaries is the svn check-in for the generate files.
+Copy them to resp. subdirectories under nmr-star-software-dictionaries and run
+
+svn commit
+
+2. copy csv files to /website/ftp/pub/bmrb/relational_tables/nmr-star3.1
+and run the loader script on the master.

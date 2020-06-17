@@ -1,0 +1,40 @@
+
+Software for generating configuration files from NMR-STAR dictionary CSV files.
+
+These files drive ADIT-NMR deposition system, validation software, database loaders, etc.
+
+See HOWTO for instructions.
+
+"Validator dictionary"
+---------------------
+
+As of 2012-11-20 the differences from "master" dictionary are in three tables:
+
+saveframe categories:
+ - are renumbered based on tag rather than supergroup order,
+ - includes "printflag": Y, O, or C, based on 1st char in validateflgs,
+    (where 'C' is for 'at least one of these saveframes must exist in the entry')
+ - includes "internalflag": that's only 'Y' on entry interview and deposited_data_files
+    (but is derived from the flag in tags table)
+
+tags:
+ - dbnullable is set to Y/N instead of "NOT NULL"
+ - informix date dbtype is fixed (should probably ask Eldon to fix it in excel spreadsheet)
+ - includes "printflag": Y, N, or O, based on convoluted combination of 1st char in validateflgs,
+     tagdeleteflgs, and tag names
+
+overrides:
+ - dbnullable is set to Y/N instead of "NOT NULL"
+ - some entry_interview tags are removed
+ - "wildcard" overrides are removed
+  -- last two because they make sense to adit-nmr but not to validator
+
+----------------------------------------------------------------------
+
+Python validation code runs off the unmodified "Eldon's" dictionary and uses the following rules:
+
+Mandatory saveframes: if the last validate flag on .Sf_category tag is 'M'.
+Mandatory tables (tag categories): if the last validate flag on primary key tag is 'R'
+ -- must exist if saveframe exists.
+Mandatory fields (tags): DB NOT NULL.
+
