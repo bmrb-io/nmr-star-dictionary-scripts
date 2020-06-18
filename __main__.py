@@ -13,6 +13,12 @@ import ConfigParser
 # from .
 import scripts
 
+# if in egg
+#try :
+#    import sas
+#except ImportError :
+#    pass
+
 if __name__ == "__main__" :
 
     ap = argparse.ArgumentParser( description = "Process NMR-STAR dictionary" )

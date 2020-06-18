@@ -6,10 +6,12 @@ import sqlite3
 import ConfigParser
 import re
 
-LIB_PATH = "/bmrb/lib/python27"
-sys.path.append( LIB_PATH )
-import sas
-
+try : 
+    LIB_PATH = "/bmrb/lib/python27"
+    sys.path.append( LIB_PATH )
+    import sas
+except ImportError :
+    import sas
 
 # quote string for STAR
 #

@@ -12,7 +12,7 @@ import hashlib
 import setuptools
 
 # CHANGEME!!!
-SAS_PATH = "/share/dmaziuk/projects/github/SAS/python/sas"
+SAS_PATH = os.path.join( os.path.split( __file__ )[0], "..", "..", "SAS/python/sas" )
 SAS_DIRS = ("ddl","mmcif","nmrstar")
 
 def cmpfiles( f1, f2 ) :
@@ -40,6 +40,8 @@ for i in ("build","dist","validate.egg-info") :
         shutil.rmtree( i )
 
 sassrcdir = SAS_PATH
+if not os.path.isdir( SAS_PATH ) :
+    raise IOError( "Not found: %s" % (SAS_PATH,) )
 sasdstdir = os.path.realpath( os.path.join( os.path.split( __file__ )[0], "sas" ) )
 copydir( sassrcdir, sasdstdir )
 for i in SAS_DIRS :
