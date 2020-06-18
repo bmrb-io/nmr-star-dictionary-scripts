@@ -29,7 +29,9 @@ xlschem_ann.csv
 
 1. Make everything:
 -------------------
-`__main__.py -c conf/dictionary.properties`
+`__main__.py -c dictionary.properties` 
+or
+`python packaging/dist/nmr_star_dictionary_scripts-1.0-py2.7.egg -c dictionary.properties`
 
 
 Detailed procedure
